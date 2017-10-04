@@ -13,9 +13,15 @@ headers = {'User-Agent':str(ua.chrome)}
 def getReview(pageNumber):
 
     amazonReviewArray = [];
-    pageNumber;
-    #page URL
-    page = urllib2.urlopen("https://www.amazon.com/Converse-Unisex-Chuck-Taylor-Sneakers/product-reviews/B01G2N1WKU/ref=cm_cr_arp_d_paging_btm_2?ie=UTF8&reviewerType=avp_only_reviews&pageNumber=" + str(pageNumber))
+    #page URLs
+    chuck = "https://www.amazon.com/Converse-Unisex-Chuck-Taylor-Sneakers/product-reviews/B01G2N1WKU/ref=cm_cr_arp_d_paging_btm_2?ie=UTF8&reviewerType=avp_only_reviews&pageNumber="
+    asics = "https://www.amazon.com/ASICS-Mens-Venture-Trail-Running/product-reviews/B00Q2JC290/ref=cm_cr_dp_d_show_all_top?ie=UTF8&reviewerType=avp_only_reviews&pageNumber="
+    newBalance = "https://www.amazon.com/New-Balance-Mens-MX608V4-Training/product-reviews/B00IYAG7DW/ref=cm_cr_dp_d_show_all_top?ie=UTF8&reviewerType=avp_only_reviews&pageNumber="
+    sketchers = "https://www.amazon.com/Skechers-Afterburn-Memory-Foam-Lace-up-Sneaker/product-reviews/B00DJSRER2/ref=cm_cr_dp_d_show_all_top?ie=UTF8&reviewerType=avp_only_reviews&pageNumber="
+    nike = "https://www.amazon.com/Nike-Mens-Monarch-Training-Shoe/product-reviews/B004K4GNF8/ref=cm_cr_arp_d_paging_btm_2?ie=UTF8&reviewerType=avp_only_reviews&pageNumber="
+    
+    page = urllib2.urlopen(sketchers + str(pageNumber))
+
 
     soup = BeautifulSoup(page)
     soupString = str(soup)
@@ -66,14 +72,22 @@ def getAllReviews(howManyPages):
                 # if(theCurrentPageNumber == 10):
                 #     return;
     # print("It is none" + allAmazonReviewsArray);
+    return allAmazonReviewsArray;
 
 
 #get reviews of X amount of pages
-theReviewsOutput = getAllReviews(20)
+theReviewsOutput = getAllReviews(30)
+
+# print(theReviewsOutput);
+
+# thefile = open('reviews.txt', 'w')
+
+# for item in theReviewsOutput:
+#   thefile.write("%s\n" % item)
 
 
 #export to CSCV
 df = pd.DataFrame(theReviewsOutput, columns=["review"])
-df.to_csv('reviews.csv', index=False)
+df.to_csv('reviewsSketchers.csv', index=False)
 print("All Done!");
 
