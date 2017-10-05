@@ -20,7 +20,7 @@ def getReview(pageNumber):
     sketchers = "https://www.amazon.com/Skechers-Afterburn-Memory-Foam-Lace-up-Sneaker/product-reviews/B00DJSRER2/ref=cm_cr_dp_d_show_all_top?ie=UTF8&reviewerType=avp_only_reviews&pageNumber="
     nike = "https://www.amazon.com/Nike-Mens-Monarch-Training-Shoe/product-reviews/B004K4GNF8/ref=cm_cr_arp_d_paging_btm_2?ie=UTF8&reviewerType=avp_only_reviews&pageNumber="
     
-    page = urllib2.urlopen(sketchers + str(pageNumber))
+    page = urllib2.urlopen(chuck + str(pageNumber))
 
 
     soup = BeautifulSoup(page)
@@ -76,7 +76,7 @@ def getAllReviews(howManyPages):
 
 
 #get reviews of X amount of pages
-theReviewsOutput = getAllReviews(30)
+theReviewsOutput = getAllReviews(200)
 
 # print(theReviewsOutput);
 
@@ -88,6 +88,6 @@ theReviewsOutput = getAllReviews(30)
 
 #export to CSCV
 df = pd.DataFrame(theReviewsOutput, columns=["review"])
-df.to_csv('reviewsSketchers.csv', index=False)
+df.to_csv('reviewsChuck200.csv', index=False)
 print("All Done!");
 
